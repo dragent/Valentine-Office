@@ -26,12 +26,13 @@ Si vous n'avez pas encore installé ces outils, vous pouvez les télécharger ic
 
 Voici comment les différents services du projet sont organisés :
 
-```
+```bash
 /valentine-project 
 ├── README.md # Documentation du projet 
 ├── valentine-backend/ # Backend Symfony (logique métier) 
 ├── valentine-frontend/ # Frontend Next.js (interface utilisateur) 
-└── valentine-infrastructure/ # Infrastructure Docker (docker-compose.yml)
+├── valentine-infrastructure/ # Infrastructure Docker (docker-compose.yml)
+└── maquettes # Maquettes et designs du projet
 ```
 
 ### Détails des Services 🌟
@@ -39,6 +40,11 @@ Voici comment les différents services du projet sont organisés :
 - **valentine-backend** : C'est le cœur du projet ! Ce dépôt contient tout le backend Symfony qui gère la logique des amendes, des contraventions, et les utilisateurs. Il interagit avec notre base de données MySQL.
 - **valentine-frontend** : Le frontend Next.js permet de donner vie à l'interface utilisateur. Il est connecté à l'API du backend pour afficher toutes les informations pertinentes.
 - **valentine-infrastructure** : Ce dépôt contient la configuration Docker pour tout faire tourner en local ou en production sans tracas. Il inclut les services nécessaires comme PHP, MySQL et Nginx.
+- **maquettes** : Ce dossier contient les maquettes et les designs du projet. Vous y trouverez les différentes étapes de la conception de l'interface utilisateur, y compris les écrans et les interactions clés.
+
+## Maquettes 🎨
+
+Les maquettes de l'interface utilisateur, créées pour guider le développement du frontend, sont disponibles dans le dossier [maquettes](/maquettes). Vous y trouverez des visuels des pages principales et des interactions prévues dans l'application.
 
 ## Installation du Projet 🚀
 
