@@ -15,7 +15,12 @@ Avant de commencer, voici les outils qu'il vous faut pour faire fonctionner ce p
 - **PHP** et **Composer** : pour travailler avec Symfony sur le backend.
 - **MySQL** : pour gérer notre base de données.
 
-Si vous n'avez pas encore installé ces outils, prenez un petit moment pour les télécharger. Si vous avez besoin d'aide, n'hésitez pas à demander ! 💡
+Si vous n'avez pas encore installé ces outils, vous pouvez les télécharger ici :
+- [Docker](https://www.docker.com/get-started)
+- [Node.js](https://nodejs.org/)
+- [PHP](https://www.php.net/)
+- [Composer](https://getcomposer.org/)
+- [MySQL](https://dev.mysql.com/downloads/)
 
 ## Structure du Projet 🏗️
 
@@ -106,7 +111,7 @@ Le backend est l'élément clé de la gestion des amendes et des contraventions.
 ```bash
 php bin/console doctrine:migrations:migrate
 ```
-## Frontend (Next.js)
+### Frontend (Next.js)
 
 Le frontend est là pour offrir une interface fluide et intuitive. Voici quelques points pour vous aider à démarrer :
 
@@ -139,7 +144,7 @@ export default function Amendes({ amendes }) {
 }
 ```
 
-## Docker 🌍
+### Docker 🌍
 
 Docker facilite la gestion de tous les services nécessaires à l'application. Si vous avez besoin d'ajuster la configuration des services, tout se trouve dans le fichier `docker-compose.yml` situé dans le dossier `valentine-infrastructure`.
 
@@ -150,9 +155,9 @@ docker-compose logs
 ```
 Et voilà ! Docker se charge de vous simplifier la vie.
 
-## Tests 🧪
+### Tests 🧪
 
-### Backend (PHPUnit)
+#### Backend (PHPUnit)
 
 Nous utilisons **PHPUnit** pour tester les fonctionnalités du backend. Si vous voulez vérifier que tout fonctionne bien, exécutez cette commande dans le dossier `valentine-backend` :
 
@@ -161,17 +166,8 @@ Nous utilisons **PHPUnit** pour tester les fonctionnalités du backend. Si vous 
 ```
 Cela exécutera tous les tests unitaires et vous permettra de vérifier que le backend est bien opérationnel.
 
-## Frontend (Jest)
+#### Frontend (Jest)
 
-Le frontend utilise **Jest** pour les tests unitaires. Si vous avez installé les dépendances frontend, vous pouvez tester le frontend avec cette commande :
-
-```bash
-npm run test
-```
-
-## Tests 🧪
-
-### Frontend (Jest)
 Le frontend utilise **Jest** pour les tests unitaires. Si vous avez installé les dépendances frontend, vous pouvez tester le frontend avec cette commande :
 
 ```bash
@@ -188,12 +184,12 @@ Pour déployer le projet en production, vous pouvez utiliser **Docker**. Assurez
 ```bash
 docker-compose up --build
 ```
-## Déploiement 🚀
+
 Une fois tous les services en ligne, vous pouvez déployer vos conteneurs sur un serveur distant.
 
 Si vous avez des questions sur le déploiement ou si vous avez besoin d'aide, nous serons heureux de vous guider !
 
-## Contribuer 🤝
+# Contribuer 🤝
 Nous adorons recevoir des contributions ! Si vous voulez apporter votre touche à ce projet, voici comment procéder :
 
 1. Forkez le projet.
@@ -205,6 +201,6 @@ Nous adorons recevoir des contributions ! Si vous voulez apporter votre touche �
 
 Nous serons ravis de discuter de vos idées et de les intégrer dans le projet !
 
-## Licence 📜
+# Licence 📜
 Ce projet est sous licence **MIT**. Vous pouvez consulter le fichier [LICENSE](LICENSE) pour plus de détails.
 
