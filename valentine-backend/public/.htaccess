@@ -1,0 +1,20 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+# Si le fichier ou le répertoire demandé existe, ne fait rien
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+ # Redirige toutes les autres requêtes vers index.php
+    RewriteRule ^(.*)$ /index.php [QSA,L]
+</IfModule>
+
+# Empêcher l'accès au fichier .htaccess
+<Files .htaccess>
+    Require all denied
+</Files>
+
+# Empêcher l'accès aux répertoires sensibles
+<FilesMatch "\.(env|json|xml|yml|yaml|lock|phar|git)">
+    Require all denied
+</FilesMatch>

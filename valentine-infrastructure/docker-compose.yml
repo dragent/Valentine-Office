@@ -1,0 +1,31 @@
+services:
+  backend:
+    build:
+      context: ../valentine-backend  # Dossier contenant le Dockerfile du backend
+    ports:
+      - "8080:80"  # Mappe le port 80 du conteneur vers le port 8080 de l'hôte
+    volumes:
+      - ../valentine-backend:/var/www/html  # Volume pour la persistance des données
+    depends_on:
+      - database  # Si tu as une base de données, assure-toi que le backend attend d'abord qu'elle soit prête
+
+  frontend:
+    build:
+      context: ../valentine-frontend  # Dossier contenant le Dockerfile du frontend
+    ports:
+      - "3000:3000"  # Mappe le port 3000 du conteneur vers le port 3000 de l'hôte
+    volumes:
+      - ../valentine-frontend:/app  # Volume pour la persistance des données
+    depends_on:
+      - backend  # Le frontend dépend du backend, donc il sera lancé après lui
+
+  database:
+    image: mysql:5.7  # Utilisation d'une image MySQL
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword  # Définir le mot de passe root
+      MYSQL_DATABASE: valentine  # Nom de la base de données
+    volumes:
+      - db_data:/var/lib/mysql  # Persistance des données de la base de données
+
+volumes:
+  db_data:

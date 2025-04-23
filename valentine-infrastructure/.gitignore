@@ -1,0 +1,13 @@
+# Fichiers Docker
+*.log
+
+# Fichiers de données Docker
+docker-compose.override.yml
+docker-compose.local.yml
+*.env
+
+# Caches de Docker
+.docker/
+
+# Autres fichiers spécifiques à l'infrastructure
+*.swp
