@@ -1,43 +1,38 @@
+# Utiliser l'image PHP avec Apache
 FROM php:8.2-apache
 
-# Dockerfile
+# Définir un ServerName pour Apache
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
-# Install dependencies
+# Installer les dépendances nécessaires
 RUN apt-get update && apt-get install -y \
     git unzip zip libicu-dev libzip-dev libpng-dev libonig-dev libxml2-dev \
     && docker-php-ext-install intl pdo pdo_mysql zip
 
-# Installe Composer
+# Installer Composer depuis l'image officielle Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copie le code source
+# Copier le code source de l'application dans le conteneur
 COPY . /var/www/html
 
-# Se place dans le bon répertoire
+# Définir le répertoire de travail dans le conteneur
 WORKDIR /var/www/html
 
-# Donne les permissions (optionnel mais souvent utile)
+COPY my-apache.conf /etc/apache2/sites-available/000-default.conf
+
+
+# Assurer que les bonnes permissions sont données au code source
 RUN chown -R www-data:www-data /var/www/html
 RUN chmod -R 755 /var/www/html
 
-# Installe les dépendances PHP
+# Installer les dépendances PHP avec Composer
 RUN composer install --no-dev --optimize-autoloader
 
-# Active le mod rewrite pour Apache
+# Activer le module Apache rewrite
 RUN a2enmod rewrite
 
-# Utiliser l'image de base Apache
-FROM php:8.2-apache
-
-# Copier le fichier de configuration personnalisé dans le conteneur
+# Copier le fichier de configuration personnalisé pour Apache (si tu en as un)
 COPY my-apache.conf /etc/apache2/sites-available/000-default.conf
 
-# Activer les modules nécessaires
-RUN a2enmod rewrite
-
-# Copier l'application dans le conteneur
-COPY . /var/www/html/
-
-# Définir le port d'écoute d'Apache
+# Exposer le port 80 pour Apache
 EXPOSE 80
