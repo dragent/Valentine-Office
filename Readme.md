@@ -42,6 +42,7 @@ Avant de commencer, assurez-vous d’avoir installé :
 
 📌 **Gestion des branches Git :**
 - `main` : version stable du projet
+- `dev` : branche d'intégration continue, utilisée pour réunir les travaux de `back` et `front` avant de les passer en `main`
 - `back` : développement du backend Symfony
 - `front` : développement du frontend Nuxt.js
 
