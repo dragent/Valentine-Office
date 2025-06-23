@@ -17,6 +17,11 @@ security:
             lazy: true
             provider: app_user_provider
             custom_authenticator: App\Security\DiscordAuthenticator
+        api:
+            pattern: ^/api
+            stateless: true
+            custom_authenticator: App\Security\JWTAuthenticator
+
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall

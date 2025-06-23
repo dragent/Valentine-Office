@@ -5,7 +5,7 @@ use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
@@ -13,6 +13,7 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPassport;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 
 class DiscordAuthenticator extends AbstractAuthenticator
 {
@@ -20,6 +21,7 @@ class DiscordAuthenticator extends AbstractAuthenticator
         private ClientRegistry $clientRegistry,
         private EntityManagerInterface $em,
         private UrlGeneratorInterface $urlGenerator,
+        private JWTTokenManagerInterface $jwtManager,
     ) {}
 
     public function supports(Request $request): ?bool
@@ -69,8 +71,10 @@ class DiscordAuthenticator extends AbstractAuthenticator
 
     public function onAuthenticationSuccess(Request $request, \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token, string $firewallName): ?Response
     {
-        dd($token->getUser()); // ← tu verras l'utilisateur connecté
-        return new RedirectResponse($this->urlGenerator->generate('app_home'));
+        $user = $token->getUser();
+        $jwt = $this->jwtManager->create($user);
+
+        return new JsonResponse(['token' => $jwt]);
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
