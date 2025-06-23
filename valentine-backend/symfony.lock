@@ -13,6 +13,15 @@
             "./src/ApiResource/.gitignore"
         ]
     },
+    "doctrine/deprecations": {
+        "version": "1.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "1.0",
+            "ref": "87424683adc81d7dc305eefec1fced883084aab9"
+        }
+    },
     "doctrine/doctrine-bundle": {
         "version": "2.14",
         "recipe": {
@@ -40,14 +49,29 @@
             "./migrations/.gitignore"
         ]
     },
-    "hwi/oauth-bundle": {
-        "version": "2.3",
+    "knpuniversity/oauth2-client-bundle": {
+        "version": "2.18",
         "recipe": {
             "repo": "github.com/symfony/recipes-contrib",
             "branch": "main",
-            "version": "2.0",
-            "ref": "20154480d558409ad3eb9de3644817c81fad2268"
-        }
+            "version": "1.20",
+            "ref": "1ff300d8c030f55c99219cc55050b97a695af3f6"
+        },
+        "files": [
+            "./config/packages/knpu_oauth2_client.yaml"
+        ]
+    },
+    "lexik/jwt-authentication-bundle": {
+        "version": "3.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "2.5",
+            "ref": "e9481b233a11ef7e15fe055a2b21fd3ac1aa2bb7"
+        },
+        "files": [
+            "./config/packages/lexik_jwt_authentication.yaml"
+        ]
     },
     "nelmio/cors-bundle": {
         "version": "2.5",
@@ -117,6 +141,15 @@
             "./src/Kernel.php"
         ]
     },
+    "symfony/maker-bundle": {
+        "version": "1.63",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "1.0",
+            "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
+        }
+    },
     "symfony/routing": {
         "version": "7.2",
         "recipe": {
@@ -166,6 +199,19 @@
         },
         "files": [
             "./config/packages/validator.yaml"
+        ]
+    },
+    "symfony/web-profiler-bundle": {
+        "version": "7.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "6.1",
+            "ref": "8b51135b84f4266e3b4c8a6dc23c9d1e32e543b7"
+        },
+        "files": [
+            "./config/packages/web_profiler.yaml",
+            "./config/routes/web_profiler.yaml"
         ]
     }
 }
