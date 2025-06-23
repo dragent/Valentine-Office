@@ -1,20 +1,24 @@
 services:
 
   # Service de base de données MySQL
-  valentine-mysql:
-    image: mysql:8
-    container_name: valentine-mysql
+  database:
+    image: 'mysql:latest'
     environment:
       MYSQL_ROOT_PASSWORD: root  # Mot de passe pour le root
       MYSQL_DATABASE: valentine_db  # Nom de la base de données
       MYSQL_USER: valentine  # Nom de l'utilisateur non-root
       MYSQL_PASSWORD: valentinepass  # Mot de passe pour l'utilisateur valentine
+      DATABASE_URL: "mysql://valentine:valentinepass@database:3306/valentine_db"
     ports:
-      - "3307:3306"
-    volumes:
-      - valentine-mysql-data:/var/lib/mysql  # Volume pour la persistance des données
+        # To allow the host machine to access the ports below, modify the lines below.
+        # For example, to allow the host to connect to port 3306 on the container, you would change
+        # "3306" to "3306:3306". Where the first port is exposed to the host and the second is the container port.
+        # See https://docs.docker.com/compose/compose-file/compose-file-v3/#ports for more information.
+        - '3306'
     networks:
-      - valentine-infrastructure_backend
+        - valentine-infrastructure_backend
+    volumes:
+      - valentine-mysql-data:/var/lib/mysql
 
   # Service backend
   backend:
@@ -25,11 +29,14 @@ services:
     volumes:
       - ../valentine-backend:/var/www/html
     depends_on:
-      - valentine-mysql  # Le backend dépend de la base de données
+      - database  # Le backend dépend de la base de données
     networks:
       - valentine-infrastructure_backend
     environment:
-      DATABASE_URL: mysql://valentine:valentinepass@valentine-mysql:3306/valentine_db
+      PP_ENV: dev
+      DATABASE_URL: mysql://valentine:valentinepass@database:3306/valentine_db
+    command: bash -c "php bin/console cache:clear --env=dev && apache2-foreground"
+
 
   # Service frontend
   frontend:
