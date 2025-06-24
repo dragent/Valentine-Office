@@ -1,38 +1,39 @@
 # Utiliser l'image PHP avec Apache
 FROM php:8.2-apache
 
-# Définir un ServerName pour Apache
+# Configuration Apache
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
-# Installer les dépendances nécessaires
+# Installer les extensions et dépendances nécessaires
 RUN apt-get update && apt-get install -y \
     git unzip zip libicu-dev libzip-dev libpng-dev libonig-dev libxml2-dev \
+    libjpeg-dev libfreetype6-dev libonig-dev libssl-dev libcurl4-openssl-dev \
     && docker-php-ext-install intl pdo pdo_mysql zip
 
-# Installer Composer depuis l'image officielle Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
-# Copier le code source de l'application dans le conteneur
-COPY . /var/www/html
-
-# Définir le répertoire de travail dans le conteneur
-WORKDIR /var/www/html
-
+# Copier le fichier de configuration Apache personnalisé
 COPY my-apache.conf /etc/apache2/sites-available/000-default.conf
 
-
-# Assurer que les bonnes permissions sont données au code source
-RUN chown -R www-data:www-data /var/www/html
-RUN chmod -R 755 /var/www/html
-
-# Installer les dépendances PHP avec Composer
-RUN composer install --no-dev --optimize-autoloader
-
-# Activer le module Apache rewrite
+# Activer mod_rewrite
 RUN a2enmod rewrite
 
-# Copier le fichier de configuration personnalisé pour Apache (si tu en as un)
-COPY my-apache.conf /etc/apache2/sites-available/000-default.conf
+# Installer Composer (depuis image officielle)
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Exposer le port 80 pour Apache
+# Copier les fichiers du projet Symfony dans le conteneur
+COPY . /var/www/html
+
+# Définir le répertoire de travail
+WORKDIR /var/www/html
+
+# Donner les bons droits à Apache
+RUN chown -R www-data:www-data /var/www/html && chmod -R 755 /var/www/html
+
+RUN git config --global --add safe.directory /var/www/html
+
+# Installer les dépendances PHP de Symfony
+RUN composer install 
+RUN php bin/console cache:clear --env=dev
+
+
+# Exposer le port HTTP
 EXPOSE 80
