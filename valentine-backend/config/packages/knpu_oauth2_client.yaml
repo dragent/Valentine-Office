@@ -6,4 +6,7 @@ knpu_oauth2_client:
             client_id: '%env(OAUTH_DISCORD_CLIENT_ID)%'
             client_secret: '%env(OAUTH_DISCORD_CLIENT_SECRET)%'
             redirect_route: connect_discord_check
-            redirect_params: {}
+            redirect_params: {}  
+            use_state: true
+            provider_options:
+                scope: ['identify', 'email', 'guild']
