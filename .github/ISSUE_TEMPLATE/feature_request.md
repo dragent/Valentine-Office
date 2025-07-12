@@ -1,15 +1,13 @@
 ---
-name: ✨ Nouvelle fonctionnalité VORP / RedM
-about: Proposer une fonctionnalité ou amélioration pour le serveur VORP / RedM
+name: ✨ Nouvelle fonctionnalité Valentine Office
+about: Proposer une nouvelle fonctionnalité ou amélioration pour Valentine Office
 title: "[FEATURE] "
-type: feature
+labels: ["A FAIRE"]
 assignees: []
 ---
 
 <!--  
-Labels disponibles :  
-- A FAIRE  
-- BLOQUÉ  
+Labels de priorité possibles (à ajouter/modifier par les devs) :  
 - PRIO : FAIBLE  
 - PRIO : MODÉRÉ  
 - PRIO : FORTE  
@@ -17,17 +15,17 @@ Labels disponibles :
 
 ## 🎯 Objectif fonctionnel
 
-Décris la fonctionnalité ou amélioration souhaitée (ex : nouveau métier, commande, système RP).
+Décris la fonctionnalité ou amélioration souhaitée dans Valentine Office.
 
 ## 🛠️ Détail technique
 
-- Scripts concernés / impactés :  
-- Conditions d’activation / prérequis :  
-- Rôles ou grades concernés :
+- Modules concernés :  
+- Conditions ou prérequis :  
+- Utilisateurs concernés (rôles, grades) :
 
 ## 💡 Idée d’implémentation
 
-Si tu as une piste technique (Lua, SQL, serveur) ou UX.
+Pistes techniques ou UX envisagées.
 
 ## 🚦 Avancées / Résolution
 
@@ -38,4 +36,4 @@ Si tu as une piste technique (Lua, SQL, serveur) ou UX.
 
 ## 🎨 Ressources (facultatif)
 
-Mockups, schémas, liens utiles.
+Mockups, schémas, liens.

@@ -1,15 +1,13 @@
 ---
-name: ♻️ Mise à jour / Refacto VORP / RedM
-about: Demande de mise à jour, correction technique, ou refactor de scripts VORP / RedM
+name: ♻️ Mise à jour / Refacto Valentine Office
+about: Demande de mise à jour, correction ou refactor pour Valentine Office
 title: "[UPDATE] "
-type: task
+labels: ["A FAIRE"]
 assignees: []
 ---
 
 <!--  
-Labels disponibles :  
-- A FAIRE  
-- BLOQUÉ  
+Labels de priorité possibles (à ajouter/modifier par les devs) :  
 - PRIO : FAIBLE  
 - PRIO : MODÉRÉ  
 - PRIO : FORTE  
@@ -17,19 +15,19 @@ Labels disponibles :
 
 ## 🔧 Contexte
 
-Quel script, module ou système doit être mis à jour ?
+Quel module ou fonctionnalité de Valentine Office doit être mis à jour ?
 
 ## 🛠️ Type de modification
 
 - [ ] Correction bug  
 - [ ] Refactor code  
-- [ ] Mise à jour dépendance (ex : fxserver, modules)  
+- [ ] Mise à jour dépendance  
 - [ ] Optimisation perf  
 - [ ] Autre :
 
-## 🎯 Pourquoi cette mise à jour ?
+## 🎯 Objectif de la mise à jour
 
-Explique l’objectif (ex : maintenance, sécurité, amélioration UX).
+Pourquoi cette modification est-elle nécessaire ?
 
 ## 🚦 Avancées / Résolution
 
@@ -40,4 +38,4 @@ Explique l’objectif (ex : maintenance, sécurité, amélioration UX).
 
 ## 📝 Détails techniques
 
-Informations complémentaires, fichiers ou fonctions concernées, liens vers PR précédentes si utiles.
+Informations complémentaires, fichiers concernés, liens.
