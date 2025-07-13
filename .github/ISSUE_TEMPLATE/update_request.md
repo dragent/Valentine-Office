@@ -4,7 +4,7 @@ about: Demande de mise à jour, correction ou refactor pour Valentine Office
 title: "[UPDATE] "
 assignees: [dragent]
 projects: [Valentine Office]
-status: "A faire"
+status: ["A faire"]
 ---
 
 ## 🔧 Contexte

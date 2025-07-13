@@ -5,7 +5,7 @@ title: "[BUG] "
 type: bug
 assignees: [dragent]
 projects: [Valentine Office]
-status: "A faire"
+status: ["A faire"]
 ---
 ## 🐛 Description du bug
 
