@@ -94,7 +94,6 @@ npm run dev
 Entités prévues :
 
 - `User` (shérifs et administrateurs)
-- `Groupe` (groupes de travail ou d’intervention)
 - `Amende` (contraventions infligées)
 - `Saisie` (biens ou personnes saisies)
 - `Coffre` (éléments saisis ou en dépôt)
