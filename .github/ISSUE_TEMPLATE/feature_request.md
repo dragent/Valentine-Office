@@ -5,7 +5,7 @@ title: "[FEATURE] "
 labels: ["A FAIRE"]
 assignees: [dragent]
 projects: [Valentine Office]
-status: "A faire"
+status: ["A faire"]
 ---
 ## 🎯 Objectif fonctionnel
 
