@@ -54,11 +54,18 @@ class User implements UserInterface
     #[ORM\OneToMany(targetEntity: Presence::class, mappedBy: 'sheriff')]
     private Collection $presences;
 
+    /**
+     * @var Collection<int, Folder>
+     */
+    #[ORM\OneToMany(targetEntity: Folder::class, mappedBy: 'sheriffInCharge')]
+    private Collection $folders;
+
     public function __construct()
     {
         $this->transactions = new ArrayCollection();
         $this->internalReports = new ArrayCollection();
         $this->presences = new ArrayCollection();
+        $this->folders = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -239,6 +246,36 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($presence->getSheriff() === $this) {
                 $presence->setSheriff(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Folder>
+     */
+    public function getFolders(): Collection
+    {
+        return $this->folders;
+    }
+
+    public function addFolder(Folder $folder): static
+    {
+        if (!$this->folders->contains($folder)) {
+            $this->folders->add($folder);
+            $folder->setSheriffInCharge($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFolder(Folder $folder): static
+    {
+        if ($this->folders->removeElement($folder)) {
+            // set the owning side to null (unless already changed)
+            if ($folder->getSheriffInCharge() === $this) {
+                $folder->setSheriffInCharge(null);
             }
         }
 
