@@ -60,12 +60,19 @@ class User implements UserInterface
     #[ORM\OneToMany(targetEntity: Folder::class, mappedBy: 'sheriffInCharge')]
     private Collection $folders;
 
+    /**
+     * @var Collection<int, FormationCheck>
+     */
+    #[ORM\OneToMany(targetEntity: FormationCheck::class, mappedBy: 'sheriff')]
+    private Collection $formationChecks;
+
     public function __construct()
     {
         $this->transactions = new ArrayCollection();
         $this->internalReports = new ArrayCollection();
         $this->presences = new ArrayCollection();
         $this->folders = new ArrayCollection();
+        $this->formationChecks = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -276,6 +283,36 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($folder->getSheriffInCharge() === $this) {
                 $folder->setSheriffInCharge(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, FormationCheck>
+     */
+    public function getFormationChecks(): Collection
+    {
+        return $this->formationChecks;
+    }
+
+    public function addFormationCheck(FormationCheck $formationCheck): static
+    {
+        if (!$this->formationChecks->contains($formationCheck)) {
+            $this->formationChecks->add($formationCheck);
+            $formationCheck->setSheriff($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFormationCheck(FormationCheck $formationCheck): static
+    {
+        if ($this->formationChecks->removeElement($formationCheck)) {
+            // set the owning side to null (unless already changed)
+            if ($formationCheck->getSheriff() === $this) {
+                $formationCheck->setSheriff(null);
             }
         }
 
