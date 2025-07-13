@@ -23,7 +23,7 @@ class Transaction
     private ?int $money = null;
 
     #[ORM\ManyToOne(inversedBy: 'transactions')]
-    private ?comptability $comtability = null;
+    private ?Comptability $comtability = null;
 
     #[ORM\ManyToOne(inversedBy: 'transactions')]
     private ?user $sheriff = null;
@@ -69,12 +69,12 @@ class Transaction
         return $this;
     }
 
-    public function getComtability(): ?comptability
+    public function getComtability(): ?Comptability
     {
         return $this->comtability;
     }
 
-    public function setComtability(?comptability $comtability): static
+    public function setComtability(?Comptability $comtability): static
     {
         $this->comtability = $comtability;
 

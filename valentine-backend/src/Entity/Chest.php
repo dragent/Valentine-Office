@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\ItemRepository;
+use App\Repository\ChestRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ItemRepository::class)]
-class Item
+#[ORM\Entity(repositoryClass: ChestRepository::class)]
+class Chest
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -21,18 +21,22 @@ class Item
     #[ORM\Column]
     private ?bool $isLegal = null;
 
-    #[ORM\Column]
-    private ?int $price = null;
-
     /**
      * @var Collection<int, ChestProduct>
      */
-    #[ORM\OneToMany(targetEntity: ChestProduct::class, mappedBy: 'item')]
+    #[ORM\OneToMany(targetEntity: ChestProduct::class, mappedBy: 'chest')]
     private Collection $chestProducts;
+
+    /**
+     * @var Collection<int, ChestWeapon>
+     */
+    #[ORM\OneToMany(targetEntity: ChestWeapon::class, mappedBy: 'chest')]
+    private Collection $chestWeapons;
 
     public function __construct()
     {
         $this->chestProducts = new ArrayCollection();
+        $this->chestWeapons = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -64,18 +68,6 @@ class Item
         return $this;
     }
 
-    public function getPrice(): ?int
-    {
-        return $this->price;
-    }
-
-    public function setPrice(int $price): static
-    {
-        $this->price = $price;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, ChestProduct>
      */
@@ -88,7 +80,7 @@ class Item
     {
         if (!$this->chestProducts->contains($chestProduct)) {
             $this->chestProducts->add($chestProduct);
-            $chestProduct->setItem($this);
+            $chestProduct->setChest($this);
         }
 
         return $this;
@@ -98,8 +90,38 @@ class Item
     {
         if ($this->chestProducts->removeElement($chestProduct)) {
             // set the owning side to null (unless already changed)
-            if ($chestProduct->getItem() === $this) {
-                $chestProduct->setItem(null);
+            if ($chestProduct->getChest() === $this) {
+                $chestProduct->setChest(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ChestWeapon>
+     */
+    public function getChestWeapons(): Collection
+    {
+        return $this->chestWeapons;
+    }
+
+    public function addChestWeapon(ChestWeapon $chestWeapon): static
+    {
+        if (!$this->chestWeapons->contains($chestWeapon)) {
+            $this->chestWeapons->add($chestWeapon);
+            $chestWeapon->setChest($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChestWeapon(ChestWeapon $chestWeapon): static
+    {
+        if ($this->chestWeapons->removeElement($chestWeapon)) {
+            // set the owning side to null (unless already changed)
+            if ($chestWeapon->getChest() === $this) {
+                $chestWeapon->setChest(null);
             }
         }
 
