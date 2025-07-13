@@ -98,6 +98,20 @@ Entités prévues :
 - `Amende` (contraventions infligées)
 - `Saisie` (biens ou personnes saisies)
 - `Coffre` (éléments saisis ou en dépôt)
+- `Comptabilité` (gestion des transactions financières)
+- `Transaction` (historique des transactions financières)
+- `Wanted` (Liste des personnes recherchées) 
+- `People` (Personnes recherchées)
+- `Item` (Objets saisis ou en dépôt)
+- `Weapon` (Armes saisies ou en dépôt)
+- `Formation` (Formations suivies par les shérifs)
+- `Presence` (Gestion des présences des shérifs)
+- `Dossier` (Dossiers des groupes ou enquêtes)
+- `Destruction` (Gestion des destructions de biens illégaux ou preuves)
+- `Rapport interne` (Rapports internes sur les shérifs)
+- `Modele` (Modèles de documents pour les amendes, saisies, etc.)
+- `Information` (Informations générales ou alertes)
+
 
 ### Frontend Nuxt.js
 
@@ -149,11 +163,4 @@ docker-compose up --build
 4. Push : `git push origin feature/ma-fonctionnalite`
 5. Ouvrez une Pull Request 🚀
 
-Toutes les contributions doivent respecter les termes de la licence MIT. Le fichier `LICENSE` est disponible à la racine du projet.
-
----
-
-## 📜 Licence
-
-MIT. Voir le fichier `LICENSE`.
-
+Toutes les contributions doivent respect
