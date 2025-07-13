@@ -2,7 +2,7 @@
 
 Bienvenue dans le projet **Valentine** !
 
-Ce projet a pour but de créer un **cahier de gestion de bureau** pour un **roleplay shérif** dans l’univers de Red Dead Redemption. Il comprend la **gestion des contraventions, des amendes, et des rappels automatiques**, avec une interface web moderne et une infrastructure solide.
+Ce projet a pour but de créer un **cahier de gestion de bureau** pour un **roleplay shérif** dans l’univers de Red Dead Redemption. Il comprend la **gestion des contraventions, des amendes, des rappels automatiques, des saisies, des groupes et d’un coffre**, avec une interface web moderne et une infrastructure solide.
 
 ## 🧱 Stack Technique
 
@@ -19,10 +19,10 @@ Le projet utilise des technologies modernes pour garantir performance, scalabili
 
 Avant de commencer, assurez-vous d’avoir installé :
 
-- [Docker 🐳](https://www.docker.com/get-started)
-- [Node.js + npm 🟢](https://nodejs.org/)
-- [PHP 🐘](https://www.php.net/) + [Composer](https://getcomposer.org/)
-- [MySQL 🐬](https://dev.mysql.com/downloads/)
+- [Docker](https://www.docker.com/get-started) 🐳
+- [Node.js](https://nodejs.org/) + npm 🟢
+- [PHP](https://www.php.net/) + [Composer](https://getcomposer.org/) 🐘
+- [MySQL](https://dev.mysql.com/downloads/) 🐬
 
 ---
 
@@ -38,8 +38,13 @@ Avant de commencer, assurez-vous d’avoir installé :
 └── maquettes/                     # Dossier contenant les maquettes UI (Adobe XD)
 ```
 
-📁 Les maquettes sont visibles ici : [https://lnkd.in/dG8rn9rd](https://lnkd.in/dG8rn9rd)
-📌 Suivi projet via Trello : [https://lnkd.in/d2CSQq8z](https://lnkd.in/d2CSQq8z)
+📁 Les maquettes sont visibles ici : [https://lnkd.in/dG8rn9rd](https://lnkd.in/dG8rn9rd) 📌 Suivi projet via Trello : [https://lnkd.in/d2CSQq8z](https://lnkd.in/d2CSQq8z)
+
+📌 **Gestion des branches Git :**
+- `main` : version stable du projet
+- `dev` : branche d'intégration continue, utilisée pour réunir les travaux de `back` et `front` avant de les passer en `main`
+- `back` : développement du backend Symfony
+- `front` : développement du frontend Nuxt.js
 
 ---
 
@@ -85,6 +90,14 @@ npm run dev
 - Les entités se trouvent dans `src/Entity`
 - Les contrôleurs dans `src/Controller`
 - Utilisation de Doctrine et migration des schémas avec `php bin/console doctrine:migrations:migrate`
+
+Entités prévues :
+
+- `User` (shérifs et administrateurs)
+- `Groupe` (groupes de travail ou d’intervention)
+- `Amende` (contraventions infligées)
+- `Saisie` (biens ou personnes saisies)
+- `Coffre` (éléments saisis ou en dépôt)
 
 ### Frontend Nuxt.js
 

@@ -1,43 +1,39 @@
+# Utiliser l'image PHP avec Apache
 FROM php:8.2-apache
 
-# Dockerfile
+# Configuration Apache
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
-# Install dependencies
+# Installer les extensions et dépendances nécessaires
 RUN apt-get update && apt-get install -y \
     git unzip zip libicu-dev libzip-dev libpng-dev libonig-dev libxml2-dev \
+    libjpeg-dev libfreetype6-dev libonig-dev libssl-dev libcurl4-openssl-dev \
     && docker-php-ext-install intl pdo pdo_mysql zip
 
-# Installe Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
-# Copie le code source
-COPY . /var/www/html
-
-# Se place dans le bon répertoire
-WORKDIR /var/www/html
-
-# Donne les permissions (optionnel mais souvent utile)
-RUN chown -R www-data:www-data /var/www/html
-RUN chmod -R 755 /var/www/html
-
-# Installe les dépendances PHP
-RUN composer install --no-dev --optimize-autoloader
-
-# Active le mod rewrite pour Apache
-RUN a2enmod rewrite
-
-# Utiliser l'image de base Apache
-FROM php:8.2-apache
-
-# Copier le fichier de configuration personnalisé dans le conteneur
+# Copier le fichier de configuration Apache personnalisé
 COPY my-apache.conf /etc/apache2/sites-available/000-default.conf
 
-# Activer les modules nécessaires
+# Activer mod_rewrite
 RUN a2enmod rewrite
 
-# Copier l'application dans le conteneur
-COPY . /var/www/html/
+# Installer Composer (depuis image officielle)
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Définir le port d'écoute d'Apache
+# Copier les fichiers du projet Symfony dans le conteneur
+COPY . /var/www/html
+
+# Définir le répertoire de travail
+WORKDIR /var/www/html
+
+# Donner les bons droits à Apache
+RUN chown -R www-data:www-data /var/www/html && chmod -R 755 /var/www/html
+
+RUN git config --global --add safe.directory /var/www/html
+
+# Installer les dépendances PHP de Symfony
+RUN composer install 
+RUN php bin/console cache:clear --env=dev
+
+
+# Exposer le port HTTP
 EXPOSE 80

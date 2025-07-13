@@ -1,0 +1,6 @@
+{
+    "require": {
+        "symfony/http-client": "^7.3",
+        "doctrine/annotations": "^2.0"
+    }
+}
