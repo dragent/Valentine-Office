@@ -48,10 +48,17 @@ class User implements UserInterface
     #[ORM\OneToMany(targetEntity: InternalReport::class, mappedBy: 'sheriff')]
     private Collection $internalReports;
 
+    /**
+     * @var Collection<int, Presence>
+     */
+    #[ORM\OneToMany(targetEntity: Presence::class, mappedBy: 'sheriff')]
+    private Collection $presences;
+
     public function __construct()
     {
         $this->transactions = new ArrayCollection();
         $this->internalReports = new ArrayCollection();
+        $this->presences = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -202,6 +209,36 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($internalReport->getSheriff() === $this) {
                 $internalReport->setSheriff(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Presence>
+     */
+    public function getPresences(): Collection
+    {
+        return $this->presences;
+    }
+
+    public function addPresence(Presence $presence): static
+    {
+        if (!$this->presences->contains($presence)) {
+            $this->presences->add($presence);
+            $presence->setSheriff($this);
+        }
+
+        return $this;
+    }
+
+    public function removePresence(Presence $presence): static
+    {
+        if ($this->presences->removeElement($presence)) {
+            // set the owning side to null (unless already changed)
+            if ($presence->getSheriff() === $this) {
+                $presence->setSheriff(null);
             }
         }
 
